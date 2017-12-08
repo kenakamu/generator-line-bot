@@ -17,6 +17,12 @@
   },
   "author": {
     "name": "kenakamu"
-  }
-  
+  },
+  "publisher": "kenakamu",
+  "repository": {
+    "url": "https://github.com/kenakamu/generator-line-bot"
+  },
+  "bugs": {
+    "url": "https://github.com/kenakamu/generator-line-bot/issues"
+  }  
 }
