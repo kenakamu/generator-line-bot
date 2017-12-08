@@ -1,0 +1,13 @@
+{
+    "name": "<%= appname %>",
+    "version": "0.0.1",
+    "description": "desc",
+    "main": "index.js",
+    "scripts": {
+      "start": "node ."
+    },
+    "dependencies": {
+      "@line/bot-sdk": "^5.0.0",
+      "express": "^4.16.2"
+    }    
+  }

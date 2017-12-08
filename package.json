@@ -1,0 +1,22 @@
+{
+  "name": "generator-line-bot",
+  "version": "0.1.0",
+  "description": "LINE Bot template generator for your preferred language",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^2.0.1"
+  },
+  "devDependencies": {
+    "@line/bot-sdk": "^5.1.0",
+    "express": "^4.16.2"
+  },
+  "author": {
+    "name": "kenakamu"
+  }
+  
+}
