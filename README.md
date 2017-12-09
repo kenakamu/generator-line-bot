@@ -24,6 +24,32 @@ yo line-bot MyBot --csharp
 
 4. Open the generated folder via VSCode and you are good to go.
 5. Visual Studio Code will let you know which extension you should install. Follow the instruction and install them as needed.
+6. Simply press F5 will start debug the application.
+
+# Other things you need to know
+
+## C#
+- make sure you install [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+- it is Azure Function v2 application and default port is 7071.
+- make sure you install [dotnet core 2](https://www.microsoft.com/net/download/windows)
+- make sure you install azure function tools for dotnetcore. For further information, see [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+
+## golang
+- make sure you installed [golang](https://golang.org/dl/) 
+- make sure you install [Go extension](https://marketplace.visualstudio.com/items?itemName=lukehoban.Go).
+- make sure you configured PATH to go command.
+- by default, it uses port 8000 when you debug locally. See .vscode/launch.json for detail.
+
+## python
+- makre sure you installed [python](https://www.python.org/downloads/)
+- make sure you install [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+- make sure you configured PATH to python and pip command.
+- by default, it uses port 8000 when you debug locally. see app.py for more detail.
+```python
+arg_parser.add_argument('-p', '--port', default=8000, help='port')
+```
+
+
 
 ## Other resources
-For further reference for each language experience, refer to followings.
+I will write detail step by step blog later.

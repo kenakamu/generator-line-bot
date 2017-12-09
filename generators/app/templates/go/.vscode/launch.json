@@ -15,7 +15,8 @@
             "program": "${file}",
             "env": {
                 "CHANNEL_TOKEN":"<%= channel_access_token %>",
-                "CHANNEL_SECRET":"<%= channel_secret %>"
+                "CHANNEL_SECRET":"<%= channel_secret %>",
+                "PORT":"8000"
             },
             "args": [],
             "showLog": true
