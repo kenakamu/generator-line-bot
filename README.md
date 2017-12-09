@@ -11,7 +11,7 @@ This is optimized for Visual Studio Code, I strongly recommend using Visual Stud
 # How to use
 1. To generate the application as "MyBot" with C# :
 
-```
+```script
 yo line-bot MyBot --csharp
 ```
 2. It also supports other languages. Change the last option 
