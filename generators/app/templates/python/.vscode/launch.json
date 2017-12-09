@@ -13,8 +13,8 @@
                 "WaitOnNormalExit"
             ],
             "env": {
-                "LINE_CHANNEL_SECRET":"<%= channel_access_token %>",
-                "LINE_CHANNEL_ACCESS_TOKEN":"<%= channel_secret %>"
+                "LINE_CHANNEL_SECRET":"<%= channel_secret %>",
+                "LINE_CHANNEL_ACCESS_TOKEN":"<%= channel_access_token %>"
             },
             "envFile": "${workspaceRoot}/.env",
             "console": "integratedTerminal",

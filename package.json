@@ -1,6 +1,6 @@
 {
   "name": "generator-line-bot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "LINE Bot template generator for your preferred language",
   "files": [
     "generators"

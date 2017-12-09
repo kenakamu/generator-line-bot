@@ -194,10 +194,6 @@ module.exports = class extends Generator {
                 }
             );
             this.fs.copy(
-                this.templatePath('python/.vscode/settings.json'),
-                this.destinationPath(`${this.appname}/.vscode/settings.json`)
-            );
-            this.fs.copy(
                 this.templatePath('python/app.py'),
                 this.destinationPath(`${this.appname}/app.py`)
             );
