@@ -65,7 +65,7 @@ module.exports = class extends Generator {
         this.option('csharp', { desc: 'C#', require: false });
         this.option('go', { desc: 'go', require: false });
         this.option('nodejs', { desc: 'Node.js', require: false });
-        this.option('py', { desc: 'python', require: false });
+        this.option('python', { desc: 'python', require: false });
 
         // Set language depending on option
         if (this.options.csharp) {
@@ -77,7 +77,7 @@ module.exports = class extends Generator {
         else if (this.options.nodejs) {
             this.language = "nodejs";
         }
-        else if (this.options.py) {
+        else if (this.options.python) {
             this.language = "python";
         }
 
@@ -95,7 +95,7 @@ module.exports = class extends Generator {
 
     // Scaffolding
     writing() {
-        if (this.options.csharp) {
+        if (this.language === "csharp") {
             this.fs.copyTpl(
                 this.templatePath('csharp/local.settings.json'),
                 this.destinationPath(`${this.appname}/local.settings.json`),
@@ -138,13 +138,10 @@ module.exports = class extends Generator {
             );
             this.fs.copy(
                 this.templatePath('csharp/Images/**/*'),
-                this.destinationPath(`${this.appname}/Images`),
-                {
-                    appname: this.appname
-                }
+                this.destinationPath(`${this.appname}/Images`)
             );
         }
-        else if (this.options.go) {
+        else if (this.language === "go") {
             this.fs.copyTpl(
                 this.templatePath('go/.vscode/launch.json'),
                 this.destinationPath(`${this.appname}/.vscode/launch.json`),
@@ -159,13 +156,10 @@ module.exports = class extends Generator {
             );
             this.fs.copy(
                 this.templatePath('go/static/**/*'),
-                this.destinationPath(`${this.appname}/static`),
-                {
-                    appname: this.appname
-                }
+                this.destinationPath(`${this.appname}/static`)
             );
         }
-        else if (this.options.nodejs) {
+        else if (this.language === "nodejs") {
             this.fs.copyTpl(
                 this.templatePath('nodejs/package.json'),
                 this.destinationPath(`${this.appname}/package.json`),
@@ -187,29 +181,46 @@ module.exports = class extends Generator {
             );
             this.fs.copy(
                 this.templatePath('nodejs/static/**/*'),
-                this.destinationPath(`${this.appname}/static`),
-                {
-                    appname: this.appname
-                }
+                this.destinationPath(`${this.appname}/static`)
             );
         }
-        else if (this.options.py) {
+        else if (this.language === "python") {
+            this.fs.copyTpl(
+                this.templatePath('python/.vscode/launch.json'),
+                this.destinationPath(`${this.appname}/.vscode/launch.json`),
+                {
+                    channel_access_token: this.channel_access_token,
+                    channel_secret: this.channel_secret
+                }
+            );
+            this.fs.copy(
+                this.templatePath('python/.vscode/settings.json'),
+                this.destinationPath(`${this.appname}/.vscode/settings.json`)
+            );
+            this.fs.copy(
+                this.templatePath('python/app.py'),
+                this.destinationPath(`${this.appname}/app.py`)
+            );
+            this.fs.copy(
+                this.templatePath('python/requirements.txt'),
+                this.destinationPath(`${this.appname}/requirements.txt`)
+            );
         }
-
     }
 
     // Install dependencies
     install() {
-        if (this.options.csharp) {
-
+        if (this.language === "csharp") {
+            this.spawnCommand('dotnet', ['restore']);
         }
-        else if (this.options.go) {
+        else if (this.language === "go") {
             this.spawnCommand('go', ['get', 'github.com/line/line-bot-sdk-go/linebot']);
         }
-        else if (this.options.nodejs) {
+        else if (this.language === "nodejs") {
             this.npmInstall(['express', '@line/bot-sdk', 'fs', 'path', 'child-process'], { 'save-dev': true }, { cwd: this.appname });
         }
-        else if (this.options.py) {
+        else if (this.language === "python") {
+            this.spawnCommand('pip', ['install', '-r', 'requirements.txt'], { cwd: this.appname });
         }
     }
 };

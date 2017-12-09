@@ -14,7 +14,7 @@
                 "newapp",
                 "secret",
                 "token",
-                "--csharp"
+                "--python"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"

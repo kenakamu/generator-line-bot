@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Console App",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "program": "${workspaceRoot}/app.py",
+            "externalConsole": true,
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit"
+            ],
+            "env": {
+                "LINE_CHANNEL_SECRET":"<%= channel_access_token %>",
+                "LINE_CHANNEL_ACCESS_TOKEN":"<%= channel_secret %>"
+            },
+            "envFile": "${workspaceRoot}/.env",
+            "console": "integratedTerminal",
+            "pythonPath": "${config:python.pythonPath}"
+        }
+    ]
+}
