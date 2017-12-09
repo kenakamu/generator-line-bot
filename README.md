@@ -8,6 +8,14 @@ npm install -g generator-line-bot
 ```
 This is optimized for Visual Studio Code, I strongly recommend using Visual Studio Code as editor. You can install it from [Visual Studio Code download](https://code.visualstudio.com/Download).
 
+# Goal
+The goal of this project is to let developer start LINE Bot developement super quick. It should be like this.
+1. generate project by yeoman
+1. Open via Visual Studio.
+1. F5 to start debugging.
+
+If you find any issue which doesn't meet this goal, please log issue or PR.
+
 # How to use
 1. To generate the application as "MyBot" with C# :
 
@@ -33,7 +41,16 @@ yo line-bot MyBot --csharp
 - it is Azure Function v2 application and default port is 7071.
 - make sure you install [dotnet core 2](https://www.microsoft.com/net/download/windows)
 - make sure you install azure function tools for dotnetcore. For further information, see [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+- The template uses Azure Blog Storage for additional features.
 
+## Node.js
+- by default, it uses port 3000 when you debug locally. See index.js for more detail.
+```javascript
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
+});
+```
 ## golang
 - make sure you installed [golang](https://golang.org/dl/) 
 - make sure you install [Go extension](https://marketplace.visualstudio.com/items?itemName=lukehoban.Go).
@@ -48,7 +65,6 @@ yo line-bot MyBot --csharp
 ```python
 arg_parser.add_argument('-p', '--port', default=8000, help='port')
 ```
-
 
 
 ## Other resources
