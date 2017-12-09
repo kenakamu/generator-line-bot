@@ -20,7 +20,7 @@ yo line-bot MyBot --csharp
 - python
 
 3. It will ask you for ChannelSecret and Token. Pass the correct values.<br/><br/>
-![installprompt.PNG](readme_img/installprompt.PNG)
+<img src="./readme_img/installprompt.PNG" width="400">
 
 4. Open the generated folder via VSCode and you are good to go.
 5. Visual Studio Code will let you know which extension you should install. Follow the instruction and install them as needed.
