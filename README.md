@@ -1,4 +1,5 @@
 # LINE Bot template generator for yeoman
+日本語は[こちら](./README_ja.md)
 
 This repository contains generator of LINE Bot for yeoman. To use the package, install yeoman and the generator.
 
