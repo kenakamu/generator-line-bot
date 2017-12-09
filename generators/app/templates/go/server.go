@@ -47,7 +47,7 @@ func main() {
 	http.HandleFunc("/callback", app.Callback)
 	// This is just a sample code.
 	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
-	if err := http.ListenAndServe(":8888", nil); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -61,7 +61,7 @@ type KitchenSink struct {
 
 // NewKitchenSink function
 func NewKitchenSink(channelSecret, channelToken, appBaseURL string) (*KitchenSink, error) {
-	apiEndpointBase := "http://localhost:8080/"
+	apiEndpointBase := os.Getenv("ENDPOINT_BASE")
 	if apiEndpointBase == "" {
 		apiEndpointBase = linebot.APIEndpointBase
 	}
