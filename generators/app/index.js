@@ -137,6 +137,10 @@ module.exports = class extends Generator {
                 this.destinationPath(`${this.appname}/LINEBOT.csproj`)
             );
             this.fs.copy(
+                this.templatePath('csharp/host.json'),
+                this.destinationPath(`${this.appname}/host.json`)
+            );
+            this.fs.copy(
                 this.templatePath('csharp/Images/**/*'),
                 this.destinationPath(`${this.appname}/Images`)
             );
