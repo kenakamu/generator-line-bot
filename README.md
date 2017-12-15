@@ -1,5 +1,5 @@
 # LINE Bot template generator for yeoman
-æ—¥æœ¬èªã?¯[ã“ã¡ã‚‰](./README_ja.md)
+“ú–{Œê‚Í[‚±‚¿‚ç](./README_ja.md)
 
 This repository contains generator of LINE Bot for yeoman. To use the package, install yeoman and the generator.
 
