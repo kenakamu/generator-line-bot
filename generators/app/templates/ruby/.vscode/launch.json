@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Local File",
+            "type": "Ruby",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/app.rb",
+            "env": {
+                "LINE_CHANNEL_TOKEN": "<%= channel_access_token %>",
+                "LINE_CHANNEL_SECRET": "<%= channel_secret %>"
+            }
+        }
+    ]
+}

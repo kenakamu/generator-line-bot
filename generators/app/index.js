@@ -9,7 +9,7 @@ module.exports = class extends Generator {
                 type: 'list',
                 name: 'language',
                 message: 'Select language',
-                choices: ['C#', 'Node.js', 'go', 'python'],
+                choices: ['C#', 'Node.js', 'go', 'python', 'ruby'],
                 default: 'C#'
             });
         }
@@ -66,6 +66,7 @@ module.exports = class extends Generator {
         this.option('go', { desc: 'go', require: false });
         this.option('nodejs', { desc: 'Node.js', require: false });
         this.option('python', { desc: 'python', require: false });
+        this.option('ruby', { desc: 'ruby', require: false });
 
         // Set language depending on option
         if (this.options.csharp) {
@@ -79,6 +80,9 @@ module.exports = class extends Generator {
         }
         else if (this.options.python) {
             this.language = "python";
+        }
+        else if (this.options.ruby) {
+            this.language = "ruby";
         }
 
         // Set other local variables.
@@ -210,6 +214,25 @@ module.exports = class extends Generator {
                 this.destinationPath(`${this.appname}/requirements.txt`)
             );
         }
+        else if (this.language === "ruby") {
+            this.fs.copyTpl(
+                this.templatePath('ruby/.vscode/launch.json'),
+                this.destinationPath(`${this.appname}/.vscode/launch.json`),
+                {
+                    channel_access_token: this.channel_access_token,
+                    channel_secret: this.channel_secret
+                }
+            );
+            this.fs.copy(
+                this.templatePath('ruby/app.rb'),
+                this.destinationPath(`${this.appname}/app.rb`)
+            );
+            this.fs.copy(
+                this.templatePath('ruby/Gemfile'),
+                this.destinationPath(`${this.appname}/Gemfile`)
+            );       
+        }
+
     }
 
     // Install dependencies
@@ -225,6 +248,10 @@ module.exports = class extends Generator {
         }
         else if (this.language === "python") {
             this.spawnCommand('pip', ['install', '-r', 'requirements.txt'], { cwd: this.appname });
+        }
+        else if (this.language === "ruby") {
+            this.spawnCommandSync('gem', ['install', 'bundler']);
+            this.spawnCommandSync('bundle', ['install'], {cwd: this.appname});
         }
     }
 };

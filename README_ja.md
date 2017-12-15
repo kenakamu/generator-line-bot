@@ -1,4 +1,4 @@
-# Yeoman 用 LINE Bot テンプレートジェネレーター
+﻿# Yeoman 用 LINE Bot テンプレートジェネレーター
 
 このレポジトリには Yeoman 用の LINE Bot テンプレートジェネレーターがあります。以下の手順で必要なモジュールをインストールします。
 
@@ -26,6 +26,7 @@ yo line-bot MyBot --csharp
 - go 
 - nodejs
 - python
+- ruby
 
 3. ChannelSecret と Token を聞かれるので入力。<br/><br/>
 <img src="./readme_img/installprompt.PNG" width="400">
@@ -66,5 +67,13 @@ app.listen(port, () => {
 arg_parser.add_argument('-p', '--port', default=8000, help='port')
 ```
 
+## Ruby 
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/) が必要です。
+- [Ruby extension](https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby) を推奨。
+- Ruby と Gem に PATH が通っていることを確認してください。
+- 既定では、ポート 4567 を使います。app.rb を確認してください。
+```ruby
+set :port, 4567
+```
 ## その他のリソース
 各言語についての詳細な手順は後日ブログ書きます。
