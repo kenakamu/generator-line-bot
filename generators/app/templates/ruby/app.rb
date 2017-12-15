@@ -8,6 +8,8 @@ def client
   }
 end
 
+set :port, 4567
+
 post '/callback' do
   body = request.body.read
 

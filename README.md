@@ -1,5 +1,5 @@
 # LINE Bot template generator for yeoman
-日本語は[こちら](./README_ja.md)
+日本語�?�[こちら](./README_ja.md)
 
 This repository contains generator of LINE Bot for yeoman. To use the package, install yeoman and the generator.
 
@@ -67,6 +67,14 @@ app.listen(port, () => {
 arg_parser.add_argument('-p', '--port', default=8000, help='port')
 ```
 
+## Ruby 
+- makre sure you installed [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+- make sure you installed [Ruby extension](https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby)
+- make sure you configured PATH to Ruby and Gem command.
+- by default, it uses port 4567 when you debug locally. see app.rb for more detail.
+```ruby
+set :port, 4567
+```
 
 ## Other resources
 I will write detail step by step blog later.
