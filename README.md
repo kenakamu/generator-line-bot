@@ -27,6 +27,7 @@ yo line-bot MyBot --csharp
 - go 
 - nodejs
 - python
+- ruby
 
 3. It will ask you for ChannelSecret and Token. Pass the correct values.<br/><br/>
 <img src="./readme_img/installprompt.PNG" width="400">
