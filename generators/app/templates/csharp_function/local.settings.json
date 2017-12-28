@@ -1,7 +1,7 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "",
+    "AzureWebJobsStorage": "<%= storage_connection_string %>",
     "ChannelSecret":"<%= channel_secret %>",
     "ChannelAccessToken":"<%= channel_access_token %>"
   }
