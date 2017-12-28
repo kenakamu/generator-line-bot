@@ -10,11 +10,7 @@
             "name": "Yeoman generator",
             "program": "C:/Users/kenakamu/AppData/Roaming/npm/node_modules/yo/lib/cli.js",
             "args": [
-                "line-bot",
-                "newapp",
-                "secret",
-                "token",
-                "--python"
+                "line-bot"                
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"

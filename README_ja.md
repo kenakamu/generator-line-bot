@@ -27,8 +27,11 @@ yo line-bot MyBot --csharp
 - nodejs
 - python
 - ruby
-
-3. ChannelSecret と Token を聞かれるので入力。<br/><br/>
+C# を選択した場合はプロジェクトのタイプも Azure ファンクションか WebAPI か聞かれます。オプションとして指定も可能です。
+```script
+yo line-bot MyBot --csharp --webapi
+```
+3. ChannelSecret と Token を聞かれるので入力。C# の場合は Azure ストレージの接続文字列も聞かれます。<br/><br/>
 <img src="./readme_img/installprompt.PNG" width="400">
 
 4. 作成されたフォルダを Visual Studio Code で開く
@@ -38,10 +41,16 @@ yo line-bot MyBot --csharp
 # 他に知っておくべきこと
 
 ## C#
+C# は Azure ファンクションと Web API のプロジェクトがタイプがあります。
+### Azure ファンクション
 - [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) を推奨。
 - Azure Function v2 が前提となっています。既定でポート 7071 で起動します。
-- [dotnet core 2](https://www.microsoft.com/net/download/windows) が必要です。
 - dotnet core 用の azure function tools が必要です。詳細は [こちら](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+### Web API
+- dotnet core 2.0 Web API が前提となっています。既定でポート 5000 で起動します。
+
+### 共通
+- [dotnet core 2](https://www.microsoft.com/net/download/windows) が必要です。
 - テンプレートは追加の情報を記録するために Azure Blog Storage も利用します。
 
 ## Node.js

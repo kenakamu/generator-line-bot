@@ -9,47 +9,77 @@ module.exports = class extends Generator {
                 type: 'list',
                 name: 'language',
                 message: 'Select language',
-                choices: ['C#', 'Node.js', 'go', 'python', 'ruby'],
-                default: 'C#'
+                choices: ['csharp', 'nodejs', 'go', 'python', 'ruby'],
+                default: 'csharp'
             });
         }
-        if (this.options.appname === undefined) {
-            prompts.push({
-                type: 'input',
-                name: 'name',
-                message: 'Your project name: ',
-                default: this.appname // Default to current folder name
-            });
-        }
-        if (this.options.channel_secret === undefined) {
-            prompts.push({
-                type: 'input',
-                name: 'channel_secret',
-                message: 'Enter your Channel Secret: '
-            });
-        }
-        if (this.options.channel_access_token === undefined) {
-            prompts.push({
-                type: 'input',
-                name: 'channel_access_token',
-                message: 'Enter your Channel Access Token: '
-            });
-        }        
 
         return this.prompt(prompts).then((answers) => {
             if (answers.language !== undefined) {
                 this.language = answers.language
             }
-            if (answers.name !== undefined) {
-                this.appname = answers.name;
+
+            var prompts = [];
+            if (this.language === "csharp" && this.projecttype === undefined) {
+                prompts.push({
+                    type: 'list',
+                    name: 'projecttype',
+                    message: 'Select Project Type',
+                    choices: ['function', 'webapi'],
+                    default: 'function'
+                });
             }
-            if (answers.channel_secret !== undefined) {
-                this.channel_secret = answers.channel_secret;
+            if (this.options.appname === undefined) {
+                prompts.push({
+                    type: 'input',
+                    name: 'name',
+                    message: 'Your project name: ',
+                    default: this.appname // Default to current folder name
+                });
             }
-            if (answers.channel_access_token !== undefined) {
-                this.channel_access_token = answers.channel_access_token;
+            if (this.options.channel_secret === undefined) {
+                prompts.push({
+                    type: 'input',
+                    name: 'channel_secret',
+                    message: 'Enter your Channel Secret: '
+                });
             }
-        });
+            if (this.options.channel_access_token === undefined) {
+                prompts.push({
+                    type: 'input',
+                    name: 'channel_access_token',
+                    message: 'Enter your Channel Access Token: '
+                });
+            }  
+            if (this.language === "csharp" && this.options.storage_connection_string === undefined) {
+                prompts.push({
+                    type: 'input',
+                    name: 'storage_connection_string',
+                    message: 'Enter Azure Storage connection string: '
+                });
+            }        
+    
+            return this.prompt(prompts).then((answers) => {
+                if (answers.language !== undefined) {
+                    this.language = answers.language
+                }
+                if (answers.projecttype !== undefined) {
+                    this.projecttype = answers.projecttype
+                }
+                if (answers.name !== undefined) {
+                    this.appname = answers.name;
+                }
+                if (answers.channel_secret !== undefined) {
+                    this.channel_secret = answers.channel_secret;
+                }
+                if (answers.channel_access_token !== undefined) {
+                    this.channel_access_token = answers.channel_access_token;
+                }
+                if (answers.storage_connection_string !== undefined) {
+                    this.storage_connection_string = answers.storage_connection_string;
+                }
+            });           
+        });        
     }
 
     // constructor
@@ -68,6 +98,10 @@ module.exports = class extends Generator {
         this.option('python', { desc: 'python', require: false });
         this.option('ruby', { desc: 'ruby', require: false });
 
+        // project type options for C#
+        this.option('function', { desc: 'Azure Function', require: false });
+        this.option('webapi', { desc: 'Web API', require: false });
+
         // Set language depending on option
         if (this.options.csharp) {
             this.language = "csharp";
@@ -85,6 +119,14 @@ module.exports = class extends Generator {
             this.language = "ruby";
         }
 
+        // Set C# project type option
+        if (this.options.csharp && this.options.function) {
+            this.projecttype = "function";
+        }
+        else if (this.options.csharp && this.options.webapi) {
+            this.projecttype = "webapi";
+        }
+
         // Set other local variables.
         if (this.options.appname) {
             this.appname = this.options.appname;
@@ -99,57 +141,112 @@ module.exports = class extends Generator {
 
     // Scaffolding
     writing() {
-        if (this.language === "csharp") {
+        if (this.language === "csharp" && this.projecttype === "function") {
             this.fs.copyTpl(
-                this.templatePath('csharp/local.settings.json'),
+                this.templatePath('csharp_function/local.settings.json'),
                 this.destinationPath(`${this.appname}/local.settings.json`),
                 {
                     channel_access_token: this.channel_access_token,
-                    channel_secret: this.channel_secret
+                    channel_secret: this.channel_secret,
+                    storage_connection_string: this.storage_connection_string
                 }
             );
             this.fs.copyTpl(
-                this.templatePath('csharp/CloudStorage/**/*'),
+                this.templatePath('csharp_function/CloudStorage/**/*'),
                 this.destinationPath(`${this.appname}/CloudStorage`),
                 {
                     appname: this.appname
                 }
             );
             this.fs.copyTpl(
-                this.templatePath('csharp/LINEBOT/**/*'),
+                this.templatePath('csharp_function/LINEBOT/**/*'),
                 this.destinationPath(`${this.appname}/LINEBOT`),
                 {
                     appname: this.appname
                 }
             );
             this.fs.copyTpl(
-                this.templatePath('csharp/Models/**/*'),
+                this.templatePath('csharp_function/Models/**/*'),
                 this.destinationPath(`${this.appname}/Models`),
                 {
                     appname: this.appname
                 }
             );
             this.fs.copyTpl(
-                this.templatePath('csharp/Services/**/*'),
+                this.templatePath('csharp_function/Services/**/*'),
                 this.destinationPath(`${this.appname}/Services`),
                 {
                     appname: this.appname
                 }
             );
             this.fs.copy(
-                this.templatePath('csharp/LINEBOT.csproj'),
+                this.templatePath('csharp_function/LINEBOT.csproj'),
                 this.destinationPath(`${this.appname}/LINEBOT.csproj`)
             );
             this.fs.copy(
-                this.templatePath('csharp/host.json'),
+                this.templatePath('csharp_function/host.json'),
                 this.destinationPath(`${this.appname}/host.json`)
             );
             this.fs.copy(
-                this.templatePath('csharp/.vscode/launch.json'),
+                this.templatePath('csharp_function/.vscode/launch.json'),
                 this.destinationPath(`${this.appname}/.vscode/launch.json`)
             );
             this.fs.copy(
-                this.templatePath('csharp/Images/**/*'),
+                this.templatePath('csharp_function/Images/**/*'),
+                this.destinationPath(`${this.appname}/Images`)
+            );
+        }
+        else if (this.language === "csharp" && this.projecttype === "webapi") {
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/appsettings.json'),
+                this.destinationPath(`${this.appname}/appsettings.json`),
+                {
+                    channel_access_token: this.channel_access_token,
+                    channel_secret: this.channel_secret,
+                    storage_connection_string: this.storage_connection_string
+                }
+            );
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/CloudStorage/**/*'),
+                this.destinationPath(`${this.appname}/CloudStorage`),
+                {
+                    appname: this.appname
+                }
+            );
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/Models/**/*'),
+                this.destinationPath(`${this.appname}/Models`),
+                {
+                    appname: this.appname
+                }
+            );
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/Services/**/*'),
+                this.destinationPath(`${this.appname}/Services`),
+                {
+                    appname: this.appname
+                }
+            );            
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/**/*.cs'),
+                this.destinationPath(`${this.appname}`),
+                {
+                    appname: this.appname
+                }
+            );
+            this.fs.copyTpl(
+                this.templatePath('csharp_webapi/.vscode/**/*'),
+                this.destinationPath(`${this.appname}/.vscode`),
+                {
+                    appname: this.appname
+                }
+            );
+            this.fs.copy(
+                this.templatePath('csharp_webapi/LINEBOT.csproj'),
+                this.destinationPath(`${this.appname}/${this.appname}.csproj`)
+            );
+            this.fs.copy(
+                this.templatePath('csharp_webapi/Images/**/*'),
                 this.destinationPath(`${this.appname}/Images`)
             );
         }
@@ -238,7 +335,7 @@ module.exports = class extends Generator {
     // Install dependencies
     install() {
         if (this.language === "csharp") {
-            this.spawnCommand('dotnet', ['restore']);
+            this.spawnCommand('dotnet', ['restore'], { cwd: this.appname });
         }
         else if (this.language === "go") {
             this.spawnCommand('go', ['get', 'github.com/line/line-bot-sdk-go/linebot']);

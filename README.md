@@ -28,7 +28,10 @@ yo line-bot MyBot --csharp
 - nodejs
 - python
 - ruby
-
+If you select csharp, it will ask you project type, either Azure Function or Web API. You can specify it as option too.
+```script
+yo line-bot MyBot --csharp --webapi
+```
 3. It will ask you for ChannelSecret and Token. Pass the correct values.<br/><br/>
 <img src="./readme_img/installprompt.PNG" width="400">
 
@@ -39,10 +42,15 @@ yo line-bot MyBot --csharp
 # Other things you need to know
 
 ## C#
-- make sure you install [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-- it is Azure Function v2 application and default port is 7071.
-- make sure you install [dotnet core 2](https://www.microsoft.com/net/download/windows)
+There are two project types. Azure Function or Web API.
+### Azure Function
+- It is Azure Function v2 application and default port is 7071.
 - make sure you install azure function tools for dotnetcore. For further information, see [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+### Web API
+- It is dotnet core 2.0 Web API and default port is 5000.
+### common
+- make sure you install [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+- make sure you install [dotnet core 2](https://www.microsoft.com/net/download/windows)
 - The template uses Azure Blog Storage for additional features.
 
 ## Node.js
